@@ -1,0 +1,245 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MapSimulator.MainWindow"
+        Title="MapSimulator" Height="537.5" Width="789" Icon="icons/graph.png" Closing="Window_Closed">
+    <Grid Background="#FFE0E0E0">
+        <Menu x:Name="MainMenu" Height="22" VerticalAlignment="Top" Background="WhiteSmoke" SnapsToDevicePixels="True">
+            <MenuItem x:Name="ProjectMenu" Header="Проект">
+                <MenuItem Header="Создать" Click="createProject">
+                    <MenuItem.Icon>
+                        <Image Source="icons/newProject.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Открыть" Click="openProject">
+                    <MenuItem.Icon>
+                        <Image Source="icons/openProject.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Сохранить" Click="saveProject">
+                    <MenuItem.Icon>
+                        <Image Source="icons/saveProject.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Сохранить как..." Click="saveAsProject">
+                    <MenuItem.Icon>
+                        <Image Source="icons/saveAsProject.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Закрыть проект" Click="closeProject">
+                    <MenuItem.Icon>
+                        <Image Source="icons/closeProject.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Выход" Click="closeProgram">
+                    <MenuItem.Icon>
+                        <Image Source="icons/closeProgram.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="MapMenu" Header="Менеджер карт">
+                <MenuItem Header="Загрузить карту" Click="loadMapImage">
+                    <MenuItem.Icon>
+                        <Image Source="icons/import.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="SimulationMenu" Header="Моделирование">
+                <MenuItem Header="Старт" Click="startSimulator">
+                    <MenuItem.Icon>
+                        <Image Source="icons/player_play(3).png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Пауза" Click="simulationPause">
+                    <MenuItem.Icon>
+                        <Image Source="icons/player_pause.png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Стоп" Click="stopSimulation">
+                    <MenuItem.Icon>
+                        <Image Source="icons/player_stop(1).png" SnapsToDevicePixels="True" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Border x:Name="topToolBarBorder" BorderBrush="LightGray" BorderThickness="0,1,0,0" Height="36" VerticalAlignment="Top" Margin="0,22,0,0" Padding="0">
+            <ToolBarTray Margin="0" VerticalAlignment="Top">
+                <ToolBar x:Name="ProjectToolBar" Margin="0">
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Cursor="Hand" Click="createProject" ToolTip="Создать проект">
+                        <Image x:Name="image" Source="icons/newProject.png" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Margin="0" SnapsToDevicePixels="True"/>
+                    </Button>
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Cursor="Hand" Click="openProject" ToolTip="Открыть проект">
+                        <Image Source="icons/openProject.png" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="True"/>
+                    </Button>
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Cursor="Hand" Click="saveProject" ToolTip="Сохранить проект">
+                        <Image Source="icons/saveProject.png" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="True"/>
+                    </Button>
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Cursor="Hand" Click="saveAsProject" ToolTip="Сохранить проект как...">
+                        <Image Source="icons/saveAsProject.png" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="True"/>
+                    </Button>
+
+                </ToolBar>
+                <ToolBar Margin="0">
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" SnapsToDevicePixels="True" Cursor="Hand" Click="startSimulator" ToolTip="Старт">
+                        <Image Source="icons/player_play(3).png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                    </Button>
+                    <Button x:Name="btnStop" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" SnapsToDevicePixels="True" Cursor="Hand" Click="stopSimulation" ToolTip="Стоп">
+                        <Image Source="icons/player_stop(1).png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                    </Button>
+                    <Button x:Name="btnPause" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" SnapsToDevicePixels="True" Cursor="Hand" Click="simulationPause" ToolTip="Пауза">
+                        <Image Source="icons/player_pause.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                    </Button>
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" SnapsToDevicePixels="True" Cursor="Hand" Click="btnFast" ToolTip="Ускорить">
+                        <Image Source="icons/player_fastforward.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                    </Button>
+                    <Grid Height="30" VerticalAlignment="Top" Width="110">
+                        <Slider x:Name="sliderSpeed" HorizontalAlignment="Left" VerticalAlignment="Center" Maximum="128" Minimum="0.1" Value="1" Width="77" Height="22" VerticalContentAlignment="Center" Padding="0" Margin="0,2,0,0"/>
+                        <TextBox HorizontalAlignment="Right" Height="20" TextWrapping="Wrap" VerticalAlignment="Center" Width="30" Text="{Binding Value, ElementName=sliderSpeed}" TextAlignment="Center" Margin="0,5"/>
+                    </Grid>
+                </ToolBar>
+                <ToolBar x:Name="SettingsRouteToolBar" Margin="0">
+                    <CheckBox x:Name="visiblyRoutes" Height="30" VerticalAlignment="Top" Width="auto" ToolTip="Отоброжать маршруты">
+                        <Image Source="icons/chart_line.png"></Image>
+                    </CheckBox>
+                </ToolBar>
+            </ToolBarTray>
+        </Border>
+        <Border x:Name="statusBarBorder" BorderBrush="LightGray" BorderThickness="0,1,0,0" Height="22" VerticalAlignment="Bottom" Background="WhiteSmoke">
+            <Label x:Name="status" Content="Состояние программы..." TextOptions.TextFormattingMode="Display" Padding="10,1,10,0"/>
+        </Border>
+        <Border x:Name="bottomToolBarBorder" BorderBrush="LightGray" BorderThickness="0,1,0,0" Height="36" VerticalAlignment="Bottom" Margin="0,0,0,22" Padding="0">
+            <ToolBarTray x:Name="bottomToolBar" Margin="0,-1,0,0" VerticalAlignment="Bottom" Height="36">
+                <ToolBar Margin="0" Height="36">
+                    <Grid Margin="5,0,0,0" Width="97">
+                        <Image Height="18" VerticalAlignment="Center" Width="18" Source="icons/size_both_add_32.png" HorizontalAlignment="Left" Margin="0" Stretch="Fill"/>
+                        <Slider VerticalAlignment="Center" Margin="21,0,0,0" x:Name="zoomSlider" 
+                			Minimum="0.01" Maximum="1" Value="1" Height="22" Foreground="#FF595757" SmallChange="0.01" TickFrequency="0.1" Cursor="Hand"/>
+                    </Grid>
+                    <Grid Width="97" Height="31" Margin="5,0,0,0">
+                        <Image Height="18" Width="18" HorizontalAlignment="Left" VerticalAlignment="Center" Source="icons/color_blackwhite.png" Margin="0" Stretch="Fill"/>
+                        <Slider x:Name="opacitySlider" VerticalAlignment="Center" Margin="21,0,0,0" Foreground="#FF595757" Maximum="1" SmallChange="0.01" TickFrequency="0.01" Value="0.5" Cursor="Hand" LargeChange="0.05" ValueChanged="SetOpacity" Height="22"/>
+                    </Grid>
+                </ToolBar>
+                <ToolBar x:Name="bottomTools" Margin="0">
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" SnapsToDevicePixels="True" Cursor="Hand" Click="arrow" ToolTip="Указатель">
+                        <Image Source="icons/cursor_arrow.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                    </Button>
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" SnapsToDevicePixels="True" Cursor="Hand" Click="createDot" ToolTip="Построить маршрут">
+                        <Image Source="icons/pencil_add.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                    </Button>
+                    <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" SnapsToDevicePixels="True" Cursor="Hand" Click="deletePivot" ToolTip="Удалить опорную точку">
+                        <Image Source="icons/eraser.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+        </Border>
+        <Grid Margin="5,59,5,63">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="0" Grid.Column="0">
+                <Border x:Name="workAreaBorder" BorderBrush="#FFC7C7C7" BorderThickness="1" Background="White">
+
+                    <ScrollViewer x:Name="WorkAreaScroll"                                 
+						VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Foreground="#FF7E7E7E" Padding="0" Background="#7FF0F0F0">
+                        <Canvas x:Name="WorkAreaCanvas" SnapsToDevicePixels="True" ClipToBounds="True" RenderTransformOrigin="0.5,0.5">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="{Binding Value, ElementName=zoomSlider}" ScaleY="{Binding Value, ElementName=zoomSlider}"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+
+
+                        </Canvas>
+
+                    </ScrollViewer>
+                </Border>
+                <Border x:Name="startPage" BorderThickness="0" Background="#FFE0E0E0" Margin="0">
+                    <Border BorderThickness="1" Width="240" Height="74" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFECECEC" CornerRadius="3" Margin="0">
+                        <Grid>
+                            <Label VerticalAlignment="Top" Height="38" Padding="0" Margin="0,4,0,0" HorizontalAlignment="Center">
+                                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Height="38" Foreground="Black"><Run Text="Чтобы начать работу необходимо загрузить карту"/></TextBlock>
+                            </Label>
+                            <Button Content="Загрузить" HorizontalAlignment="Center" Margin="82,44,82,0" VerticalAlignment="Top" Width="74" Click="start_page_image_load" BorderBrush="#FFEEF5FD" Foreground="#FF3A587C" Cursor="Hand"/>
+                        </Grid>
+                    </Border>
+                </Border>
+            </Grid>
+            <GridSplitter Width="8" Margin="3,10" Grid.Column="1" Background="#FFEEF5FD" VerticalAlignment="Stretch" HorizontalAlignment="Center" BorderThickness="2" BorderBrush="#FFB4B4B4" Foreground="{x:Null}"/>
+            <Grid Margin="0" Grid.Column="2">
+                <Border BorderThickness="1" Background="#FFECECEC" BorderBrush="#FFC7C7C7">
+                    <Grid>
+                        <Grid x:Name="RoutePanel" Margin="5" Visibility="Hidden">
+                            <TextBox x:Name="tbComment" Height="51" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,91,0,0"/>
+                            <TextBox x:Name="tbRouteName" Height="23" Margin="0,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SelectedValue, ElementName=cbRoutes, Mode=OneWay}"/>
+                            <Label Content="Название маршрута" Margin="0,33,0,0" VerticalAlignment="Top" Padding="0" VerticalContentAlignment="Center" TextOptions.TextFormattingMode="Display"/>
+                            <TabControl Margin="0,147,0,0" SelectedIndex="0">
+                                <TabItem Header="Участки" TextOptions.TextFormattingMode="Display">
+                                    <Grid Background="#FFE5E5E5">
+                                        <DataGrid x:Name="tableSectorsRoute" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="5">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Visibility="Hidden" Binding="{Binding SectorId}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Visibility="Hidden" Binding="{Binding RouteId}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Header="Название участка" Binding="{Binding SectorName}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Header="Время в пути (сек.)" Binding="{Binding SectorTime}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Header="Начало участка" Binding="{Binding StartDotName}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Header="Конец участка" Binding="{Binding EndDotName}" ClipboardContentBinding="{x:Null}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="Опорные точки" TextOptions.TextFormattingMode="Display">
+                                    <Grid Background="#FFE5E5E5">
+                                        <DataGrid x:Name="tablePivotRoute" AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="5">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Visibility="Hidden" Binding="{Binding PivotId}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Visibility="Hidden" Binding="{Binding RouteId}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Header="Название точки" Binding="{Binding PivotName}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Header="Предыдущая точка" Binding="{Binding PrevDotName}" ClipboardContentBinding="{x:Null}"/>
+                                                <DataGridTextColumn Header="Следующая точка" Binding="{Binding NextDotName}" ClipboardContentBinding="{x:Null}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                            <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" SnapsToDevicePixels="True" Cursor="Hand" ToolTip="Обновить данные о маршруте" Click="refreshRouteInfo" Margin="0" BorderBrush="#FFC1C1C1">
+                                <Image Source="icons/refresh.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                            </Button>
+                            <Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" SnapsToDevicePixels="True" Cursor="Hand" ToolTip="Применить изменения маршрута" Click="updateRouteInfo" Margin="35,0,0,0" BorderBrush="#FFC1C1C1">
+                                <Image Source="icons/agt_update_recommended.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" SnapsToDevicePixels="False" Stretch="UniformToFill"/>
+                            </Button>
+                            <Label x:Name="lbRouteNmae" Content="..." Margin="70,0,5,0" VerticalAlignment="Top" Height="30"/>
+                            <Label Content="Описание" Margin="0,75,0,0" VerticalAlignment="Top" Padding="0" VerticalContentAlignment="Center" TextOptions.TextFormattingMode="Display"/>
+                        </Grid>
+                        <Grid x:Name="RouteStartPanel">
+                            <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="181" CornerRadius="6" Background="#FFD4D4D4">
+                                <Label Content="Информация о маршруте" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF595959"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Border x:Name="startProject" BorderThickness="0" Background="#FFE0E0E0" Margin="5,59,5,63" d:IsHidden="True">
+            <Border BorderThickness="1" Width="175" Height="67" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFECECEC" CornerRadius="8" Margin="0" BorderBrush="#FFC3BCBC">
+                <Grid Margin="0">
+                    <Grid Margin="0,10">
+                        <Button Content="Открыть проект" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" Width="120" Click="openProject" BorderBrush="{x:Null}" Foreground="#FF09246E" Cursor="Hand" Background="{x:Null}"/>
+                        <Button Content="Создать проект" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Bottom" Width="120" Click="createProject" BorderBrush="{x:Null}" Foreground="#FF09246E" Cursor="Hand" Background="{x:Null}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>
